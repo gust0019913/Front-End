@@ -1,0 +1,20 @@
+body {
+  background-color: #f8f9fa;
+}
+
+.navbar {
+  background-color: #0046AD;
+}
+
+.navbar-brand, .nav-link {
+  color: white !important;
+}
+
+.card-header {
+  background-color: #0046AD;
+  color: white;
+}
+
+.card {
+  margin-bottom: 20px;
+}
