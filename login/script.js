@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             console.log('API call successful:', response.data);
-            localStorage.setItem('accessToken', response.AccessToken);
+            localStorage.setItem('accessToken', response.data.AuthenticationResult.AccessToken);
             return {
                 statusCode: response.status,
             };
