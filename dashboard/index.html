@@ -17,7 +17,7 @@
                 </li>
             </ul>
         </div>
-        <span class="navbar-text text-white ml-auto" id="userPlaceholder">User</span>
+        <span class="navbar-text text-white" id="user">User</span>
     </nav>
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -26,39 +26,8 @@
                 <a href="course_creation.html" class="btn btn-primary mt-4 mb-4">Create a New Course</a>
                 <div class="card mt-4">
                     <div class="card-header bg-primary text-white">Courses</div>
-                    <div class="card-body">
-                        <a href="course.html?course=IntroLiteraryStudies" class="card-link">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">Introduction to Literary Studies</h5>
-                                    <p class="card-text">Department of English Literature</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="course.html?course=ShakespeareanLiterature" class="card-link">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">Shakespearean Literature</h5>
-                                    <p class="card-text">Department of English Literature</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="course.html?course=ModernAmericanLiterature" class="card-link">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">Modern American Literature</h5>
-                                    <p class="card-text">Department of English Literature</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="course.html?course=VictorianLiterature" class="card-link">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <h5 class="card-title">Victorian Literature</h5>
-                                    <p class="card-text">Department of English Literature</p>
-                                </div>
-                            </div>
-                        </a>
+                    <div class="card-body" id="courses-container">
+                        <!-- Course cards will be dynamically inserted here -->
                     </div>
                 </div>
             </div>
@@ -66,7 +35,7 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.amazonaws.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="scripts.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
