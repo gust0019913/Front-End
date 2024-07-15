@@ -1,7 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-    var userRole = 'Student'; // This can be 'Teacher', 'Parent', etc.
-    document.getElementById('userRole').textContent = userRole;
-
     const urlParams = new URLSearchParams(window.location.search);
     const course = urlParams.get('course');
 
@@ -24,4 +21,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     document.getElementById('courseTitle').textContent = courseTitle;
+
+    // Set the link to the chatbot page with the current course
+    document.getElementById('chatbotLink').href = `chatbot.html?course=${course}`;
+
+    document.getElementById('userPlaceholder').textContent = 'User'; // This will be dynamically set based on login
 });

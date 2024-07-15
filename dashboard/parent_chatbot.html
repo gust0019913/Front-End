@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent Chatbot</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <span class="navbar-brand text-white">University</span>
+        <span class="navbar-text text-white ml-auto" id="userPlaceholder">User</span>
+    </nav>
+    <div class="container mt-3">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mt-4">
+                    <div class="card-header bg-primary text-white">Chatbot</div>
+                    <div class="card-body">
+                        <div id="chatContainer" class="mb-3" style="height: 400px; overflow-y: scroll; border: 1px solid #dee2e6; padding: 10px;">
+                            <!-- Chat messages will appear here -->
+                        </div>
+                        <div class="input-group">
+                            <input type="text" id="chatInput" class="form-control" placeholder="Type a message...">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" id="sendButton">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.amazonaws.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('userPlaceholder').textContent = 'User'; // This will be dynamically set based on login
+
+            const chatContainer = document.getElementById('chatContainer');
+            const chatInput = document.getElementById('chatInput');
+            const sendButton = document.getElementById('sendButton');
+
+            sendButton.addEventListener('click', function() {
+                const userMessage = chatInput.value;
+                if (userMessage.trim() !== "") {
+                    const userMessageElement = document.createElement('div');
+                    userMessageElement.classList.add('text-right');
+                    userMessageElement.innerHTML = `<strong>You:</strong> ${userMessage}`;
+                    chatContainer.appendChild(userMessageElement);
+                    chatInput.value = '';
+                    
+                    // Simulate chatbot response
+                    setTimeout(function() {
+                        const botMessageElement = document.createElement('div');
+                        botMessageElement.classList.add('text-left');
+                        botMessageElement.innerHTML = `<strong>Bot:</strong> I received your message: ${userMessage}`;
+                        chatContainer.appendChild(botMessageElement);
+                        chatContainer.scrollTop = chatContainer.scrollHeight;
+                    }, 1000);
+                }
+            });
+
+            chatInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    sendButton.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

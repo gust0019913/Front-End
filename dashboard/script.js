@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('userPlaceholder').textContent = 'User'; // This will be dynamically set based on login
     const email = localStorage.getItem('email')
     document.getElementById('user').textContent = email; // Update the user role in the top-right corner
 
@@ -108,7 +109,5 @@ loadUserDetails()
             console.error('Error fetching courses:', error);
         }
     }
-    
-    
     
 });
