@@ -22,24 +22,23 @@ body {
 .custom-dropdown {
   position: relative;
   display: inline-block;
-  width: 100%;
+  width: 200px; /* Adjust width as needed */
 }
 
 .custom-dropdown-select {
-  width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  background-color: #f1f1f1;
   cursor: pointer;
-  background-color: white;
+  border: 1px solid #ccc;
 }
 
 .custom-dropdown-content {
   display: none;
   position: absolute;
-  background-color: white;
+  background-color: #f9f9f9;
+  min-width: 100%;
   border: 1px solid #ccc;
   z-index: 1;
-  width: 100%;
   max-height: 200px;
   overflow-y: auto;
 }
@@ -53,6 +52,34 @@ body {
   background-color: #f1f1f1;
 }
 
-.custom-dropdown-content .selected {
+.custom-dropdown-content.show {
+  display: block;
+}
+
+.selected {
+  background-color: #d1d1d1;
+}
+.chat-message {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  clear: both;
+}
+.chat-message.bot {
+  background-color: #e1f3fb;
+  align-self: flex-start;
+}
+.chat-message.user {
   background-color: #d1e7dd;
+  align-self: flex-end;
+  text-align: right;
+}
+#chatContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden {
+  display: none;
 }

@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
 
-        if (validateEmail(email)){
+        if (selectedAccountType == validateEmail(email)){
 
             try {
                 localStorage.setItem('email', email);
@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         } else {
+            console.log(selectedAccountType)
             alert("Please make sure you selected the correct account type")
         }
 
@@ -82,22 +83,24 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function validateEmail(email) {
-        if (selectedAccountType === 'student') {
+
             // Check if the email starts with 'gust00'
-            return email.startsWith('gust00');
-        } else if (selectedAccountType === 'teacher') {
-            // Check if the email follows the 'lastname.f@gust.com' pattern
+            if (email.startsWith('gust00') == true) {
+                localStorage.setItem('role', selectedAccountType);
+                return 'student';
+                
+        }  // Check if the email follows the 'lastname.f@gust.com' pattern
             const emailParts = email.split('@');
-            if (emailParts.length === 2 && emailParts[1] === 'gust.com') {
+            if (emailParts.length === 2 && emailParts[1] === 'gust.edu.kw') {
                 const nameParts = emailParts[0].split('.');
                 if (nameParts.length === 2 && nameParts[1].length === 1) {
-                    return true;
+                    localStorage.setItem('role', selectedAccountType);
+                    return 'teacher';
                 }
-            }
-            return false;
+            return 'wrong email';
         }
         // Add additional conditions for other account types if needed
-        return true;
+        return 'wrong email';
     }
 
 });
