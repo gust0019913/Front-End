@@ -1,10 +1,14 @@
-document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById('userPlaceholder').textContent = 'User'; // This will be dynamically set based on login
+document.addEventListener("DOMContentLoaded", function() { // This will be dynamically set based on login
     const email = localStorage.getItem('email')
     document.getElementById('user').textContent = email; // Update the user role in the top-right corner
 
     const accessToken = localStorage.getItem('accessToken');
-    console.log(accessToken)
+    const role = localStorage.getItem('role');
+    console.log(role);
+    const createBtn = document.getElementById('createBtn');
+    if (role == 'teacher') {
+        createBtn.classList.remove('hidden');
+    }
     const coursesContainer = document.getElementById('courses-container');
 
     let  subValue = '';
@@ -38,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
         for (const detail of userDetails) {
             if (detail.Name === 'sub') {
                 subValue = detail.Value; // Return the value if 'sub' is found
+                localStorage.setItem('sub', subValue);
             }
         }
         console.log(subValue); // Log the sub value
@@ -49,9 +54,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
 loadUserDetails()
   
-  async function fetchUserCourses(subValue) {
+  async function fetchStudentCourses(subValue) {
     try {
-        const response = await fetch(`https://12f2t7lfmd.execute-api.eu-west-1.amazonaws.com/dev/get_enrolledCourses?studentID=${subValue}`);
+        const response = await fetch(`https://12f2t7lfmd.execute-api.eu-west-1.amazonaws.com/dev/get_studentEnrolledCourses?studentID=${subValue}`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const courses = await response.json();
+        return courses.enrolledCourses; //returns the enrolled courses list
+    } catch (error) {
+        console.error('Error fetching courses:', error);
+        coursesContainer.innerHTML = '<p>Error loading courses. Please try again later.</p>';
+    }
+}
+
+async function fetchTeacherCourses(subValue) {
+    try {
+        const response = await fetch(`https://12f2t7lfmd.execute-api.eu-west-1.amazonaws.com/dev/get_teacherEnrolledCourses?teacherID=${subValue}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -79,7 +98,7 @@ loadUserDetails()
       
       function displayCourse(course) {
         const courseCard = `
-            <a href="course.html?course=${course.CourseID}" class="card-link">
+            <a href="course.html?courseName=${course.CourseName}&contentPath=${course.ContentPath}" class="card-link">
                 <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="card-title">${course.CourseName}</h5>
@@ -95,7 +114,13 @@ loadUserDetails()
 
     async function loadCourses() {
         try {
-            const enrolledCoursesList = await fetchUserCourses(subValue);
+            let enrolledCoursesList = '';
+            if (role === 'student') {
+                enrolledCoursesList = await fetchStudentCourses(subValue);
+            } else {
+                enrolledCoursesList = await fetchTeacherCourses(subValue);
+            }
+            
             
             if (Array.isArray(enrolledCoursesList)) {
                 for (const courseID of enrolledCoursesList) {
