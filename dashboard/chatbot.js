@@ -1,14 +1,23 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
     const urlParams = new URLSearchParams(window.location.search);
     const courseName = urlParams.get('courseName');
-    const contentPath = urlParams.get('contentPath');
+    const accessToken = localStorage.getItem('accessToken'); //for parent details
+    let contentPath = '';
+    let subValue = ''; //for parent details
+    let studentID = '';
     const email = localStorage.getItem('email')
     document.getElementById('user').textContent = email;
+    const role = localStorage.getItem('role');
 
-    document.getElementById('backToCourseBtn').href = `course.html?courseName=${courseName}`;
-
-     // This will be dynamically set based on login
-
+    if (role != 'parent') {
+        contentPath = urlParams.get('contentPath');
+        document.getElementById('backToCourseBtn').href = `course.html?courseName=${courseName}`;
+        document.getElementById('backToCourseBtn').classList.remove('hidden');
+    } else {
+        await loadUserDetails();
+        studentID = await fetchStudentOfParent(subValue);
+        contentPath = `reports/${studentID}/report.txt`;
+    }
 
 
     const chatContainer = document.getElementById('chatContainer');
@@ -85,6 +94,59 @@ document.addEventListener("DOMContentLoaded", function() {
         } catch (error) {
             console.error('Error invoking chatbot API:', error);
             // Handle errors here
+        }
+    }
+
+    async function fetchUserDetails() { //to fetch the user details of the parent
+        const apiUrl = `https://12f2t7lfmd.execute-api.eu-west-1.amazonaws.com/dev/get_userDetails?access_token=${accessToken}`;
+    
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status} - ${response.statusText}`);
+            }
+    
+            const userDetails = await response.json();
+            return userDetails;
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+    }
+
+    async function loadUserDetails() {
+        try {
+            const userDetails = await fetchUserDetails(); // Await the promise
+            console.log(userDetails); // Now you can access the actual user details
+            for (const detail of userDetails) {
+                if (detail.Name === 'sub') {
+                    subValue = detail.Value; // Return the value if 'sub' is found
+                    localStorage.setItem('sub', subValue);
+                }
+            }
+            console.log(subValue); // Log the sub value
+            await loadCourses()
+        } catch (error) {
+            console.error('Error loading user details:', error);
+        }
+    }
+
+    async function fetchStudentOfParent(subValue) {
+        try {
+            const response = await fetch(`https://12f2t7lfmd.execute-api.eu-west-1.amazonaws.com/dev/get_studentOfParent?parentID=${subValue}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            return data.studentID[0]; //returns the enrolled courses list
+        } catch (error) {
+            console.error('Error fetching courses:', error);
+            coursesContainer.innerHTML = '<p>Error loading courses. Please try again later.</p>';
         }
     }
 

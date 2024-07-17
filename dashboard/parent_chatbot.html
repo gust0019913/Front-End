@@ -3,16 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parent Chatbot</title>
+    <title>Chatbot</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <span class="navbar-brand text-white">University</span>
-        <span class="navbar-text text-white ml-auto" id="userPlaceholder">User</span>
+        <a class="navbar-brand text-white" href="index.html">University</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="index.html">Dashboard</a>
+                </li>
+            </ul>
+        </div>
+        <span class="navbar-text text-white ml-auto" id="user"></span>
     </nav>
     <div class="container mt-3">
+        <div class="row">
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card mt-4">
@@ -35,40 +44,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.amazonaws.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById('userPlaceholder').textContent = 'User'; // This will be dynamically set based on login
-
-            const chatContainer = document.getElementById('chatContainer');
-            const chatInput = document.getElementById('chatInput');
-            const sendButton = document.getElementById('sendButton');
-
-            sendButton.addEventListener('click', function() {
-                const userMessage = chatInput.value;
-                if (userMessage.trim() !== "") {
-                    const userMessageElement = document.createElement('div');
-                    userMessageElement.classList.add('text-right');
-                    userMessageElement.innerHTML = `<strong>You:</strong> ${userMessage}`;
-                    chatContainer.appendChild(userMessageElement);
-                    chatInput.value = '';
-                    
-                    // Simulate chatbot response
-                    setTimeout(function() {
-                        const botMessageElement = document.createElement('div');
-                        botMessageElement.classList.add('text-left');
-                        botMessageElement.innerHTML = `<strong>Bot:</strong> I received your message: ${userMessage}`;
-                        chatContainer.appendChild(botMessageElement);
-                        chatContainer.scrollTop = chatContainer.scrollHeight;
-                    }, 1000);
-                }
-            });
-
-            chatInput.addEventListener('keypress', function(event) {
-                if (event.key === 'Enter') {
-                    sendButton.click();
-                }
-            });
-        });
-    </script>
+    <script src="chatbot.js"></script>
 </body>
 </html>

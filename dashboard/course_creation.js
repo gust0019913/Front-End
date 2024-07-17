@@ -5,6 +5,7 @@
             document.getElementById('user').textContent = email;
             let fileContent = '';
             let contentPath = '';
+            let courseID = '';
             fetchStudents();
             document.getElementById('dropdownSelect').addEventListener('click', toggleDropdown);
             document.getElementById('createCourseBtn').addEventListener('click', function(event) {
@@ -13,7 +14,7 @@
                 // Retrieve values from inputs or wherever they are stored
                 let courseName = document.getElementById('courseName').value;
                 let courseDescription = document.getElementById('courseDescription').value;
-                let courseID = document.getElementById('courseId').value;
+                courseID = document.getElementById('courseId').value;
             
                 // Check if any required field is empty
                 if (courseName.trim() === '' || courseDescription.trim() === '' || courseID.trim() === '' || fileContent.trim() === '') {
@@ -154,12 +155,14 @@ window.addEventListener('click', function(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
     const fileName = file.name;
+    courseID = document.getElementById('courseId').value;
 
     reader.onload = function(event) {
         const base64String = event.target.result.split(',')[1]; // Extract base64 string without data URL prefix
         console.log('Base64 Encoded File:', base64String);
         fileContent = base64String;
-        contentPath = fileName;
+        contentPath = `uploads/${courseID}/${fileName}`;
+        console.log(contentPath);
         // Now you can use base64String as needed, e.g., send it to a server or store it locally
     };
 

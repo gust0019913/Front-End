@@ -17,7 +17,7 @@
                 </li>
             </ul>
         </div>
-        <span class="navbar-text text-white" id="user">User</span>
+        <span class="navbar-text text-white" id="user"></span>
     </nav>
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -30,69 +30,30 @@
                         <!-- Course cards will be dynamically inserted here -->
                     </div>
                 </div>
-                <div class="card mt-4">
+                <div id='assignStudentsCard' class="card mt-4 hidden">
                     <div class="card-header bg-primary text-white">Assign Parents to Students</div>
                     <div class="card-body">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Student ID</th>
+                                    <th>Student Email</th>
                                     <th>Assign Parent</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>gust0022197</td>
-                                    <td>
-                                        <select class="form-control">
-                                            <option>Select a parent</option>
-                                            <option>Parent 1</option>
-                                            <option>Parent 2</option>
-                                            <option>Parent 3</option>
-                                        </select>
-                                    </td>
-                                    <td><button class="btn btn-primary">Update</button></td>
-                                </tr>
-                                <tr>
-                                    <td>gust0022190</td>
-                                    <td>
-                                        <select class="form-control">
-                                            <option>Select a parent</option>
-                                            <option>Parent 1</option>
-                                            <option>Parent 2</option>
-                                            <option>Parent 3</option>
-                                        </select>
-                                    </td>
-                                    <td><button class="btn btn-primary">Update</button></td>
-                                </tr>
-                                <tr>
-                                    <td>gust1</td>
-                                    <td>
-                                        <select class="form-control">
-                                            <option>Select a parent</option>
-                                            <option>Parent 1</option>
-                                            <option>Parent 2</option>
-                                            <option>Parent 3</option>
-                                        </select>
-                                    </td>
-                                    <td><button class="btn btn-primary">Update</button></td>
-                                </tr>
+                               
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <div class="card mt-4">
-                    <div class="card-header bg-primary text-white">Upload File for Student</div>
+                <div id='uploadReportCard' class="card mt-4 hidden">
+                    <div class="card-header bg-primary text-white">Upload report card for student</div>
                     <div class="card-body">
                         <form id="uploadForm">
                             <div class="form-group">
-                                <label for="studentId">Student ID:</label>
-                                <select class="form-control" id="studentId">
-                                    <option>Select a student</option>
-                                    <option>gust0022197</option>
-                                    <option>gust0022190</option>
-                                    <option>gust1</option>
+                                <label for="studentEmail">Student Email:</label>
+                                <select class="form-control" id="studentEmail">
                                 </select>
                             </div>
                             <div class="form-group">

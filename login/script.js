@@ -37,8 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await attemptLogin(email, password);
                 console.log(result);
     
-                if (result.statusCode === 200) {
+                if (result.statusCode === 200 && selectedAccountType != 'parent') {
                     window.location.href = '../dashboard/index.html';
+                } else if (result.statusCode === 200 && selectedAccountType == 'parent') {
+                    window.location.href = '../dashboard/chatbot.html';
                 } else {
                     alert("Login failed!");
                 }
@@ -88,8 +90,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (email.startsWith('gust00') == true) {
                 localStorage.setItem('role', selectedAccountType);
                 return 'student';
+
                 
-        }  // Check if the email follows the 'lastname.f@gust.com' pattern
+                
+        } //check if email starts with 'parent00'
+            if (email.startsWith('parent00') == true) {
+                localStorage.setItem('role', selectedAccountType)
+                return 'parent';
+        }
+
+        // Check if the email follows the 'lastname.f@gust.edu.kw' pattern
             const emailParts = email.split('@');
             if (emailParts.length === 2 && emailParts[1] === 'gust.edu.kw') {
                 const nameParts = emailParts[0].split('.');
