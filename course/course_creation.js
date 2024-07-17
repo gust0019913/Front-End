@@ -134,7 +134,7 @@ function createCourse(courseID, courseName, courseDesc, fileContent, contentPath
     .then(data => {
         console.log('Course created successfully:', data);
         alert("Course created successfully!");
-        window.location.href = 'index.html';
+        window.location.href = '../dashboard/index.html';
     })
     .catch(error => {
         console.error('Error creating course:', error);

@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 
     if (role != 'parent') {
         contentPath = urlParams.get('contentPath');
-        document.getElementById('backToCourseBtn').href = `course.html?courseName=${courseName}`;
+        document.getElementById('backToCourseBtn').href = `../course/course.html?courseName=${courseName}`;
         document.getElementById('backToCourseBtn').classList.remove('hidden');
     } else {
         await loadUserDetails();

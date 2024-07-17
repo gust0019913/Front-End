@@ -15,5 +15,5 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('courseTitle').textContent = courseTitle;
 
     // Set the link to the chatbot page with the current course
-    document.getElementById('chatbotLink').href = `chatbot.html?courseName=${courseName}&contentPath=${contentPath}`;
+    document.getElementById('chatbotLink').href = `../chatbot/chatbot.html?courseName=${courseName}&contentPath=${contentPath}`;
 });

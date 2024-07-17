@@ -108,7 +108,7 @@ async function fetchTeacherCourses(subValue) {
       
       function displayCourse(course) {
         const courseCard = `
-            <a href="course.html?courseName=${course.CourseName}&contentPath=${course.ContentPath}" class="card-link">
+            <a href="../course/course.html?courseName=${course.CourseName}&contentPath=${course.ContentPath}" class="card-link">
                 <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="card-title">${course.CourseName}</h5>
